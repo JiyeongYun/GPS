@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import hgu.csee.oodp.gps.group.Group;
-import hgu.csee.oodp.gps.login.Login;
+import hgu.csee.oodp.gps.login.LoginPage;
 import hgu.csee.oodp.gps.model.User;
 import hgu.csee.oodp.gps.task.MainTask;
 
@@ -22,19 +22,18 @@ public class GPURunner {
 	public static List<User> userList = new ArrayList<>();
 
 	public static void main(String[] args) {
-
+		
 		getUserList();
-		new Login();
+		new LoginPage();
 
 	}
 
 	public static void getUserList() {
 		try {
-			// txt 데이터 파일
+			
+			//Read a user data
 			File userFile = new File("./data/User.csv");
 			BufferedReader br = new BufferedReader(new FileReader(userFile));
-			//File groupFile = new File("/Users/PC/eclipse-workspace/data/Group.csv");
-			//BufferedReader br2 = new BufferedReader(new FileReader(groupFile));
 
 			String line = "";
 
@@ -47,30 +46,7 @@ public class GPURunner {
 				userList.add(user);
 			}
 
-			/* for later
-			while ((line = br2.readLine()) != null) {
-				String[] groupInfo = line.split(",");
-				for(int i = 0; i < groupInfo.length; i++) {
-					System.out.println(groupInfo[i]);
-				}
-				System.out.println("group Info size: "+groupInfo.length);
-				String[] userList = groupInfo[2].split("/");
-				String[] mainTaskList = groupInfo[4].split("/");
-				if(mainTaskList == null) {
-					mainTaskList[0] = groupInfo[4];
-				}
-				ArrayList<String> userArr = new ArrayList<>();
-				ArrayList<String> mainTaskArr = new ArrayList<>();
-				Collections.addAll(userArr, userList);
-				Collections.addAll(mainTaskArr, mainTaskList);
-
-				Group group = new Group(Integer.valueOf(groupInfo[0]), groupInfo[1], userArr, groupInfo[3], mainTaskArr);
-				groupList.add(group);
-			}
-			
 			br.close();
-			br2.close();
-			*/
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
