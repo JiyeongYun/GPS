@@ -10,10 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import hgu.csee.oodp.gps.GPURunner;
-import hgu.csee.oodp.gps.group.Group;
+import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.group.MakeGroupPage;
+import hgu.csee.oodp.gps.model.Group;
 
 import javax.swing.JLabel;
 
@@ -27,8 +27,8 @@ public class MainPage extends JFrame {
 	
 	public ArrayList<Group> getGroupList() {
 		ArrayList<Group> groups = new ArrayList<>();
-		for(Group group : GPURunner.groupList) {
-			if(group.getUserList().contains(GPURunner.user.getName())) {
+		for(Group group : GPSRunner.groupList) {
+			if(group.getUserList().contains(GPSRunner.user.getName())) {
 				groups.add(group);
 			}
 		}
@@ -66,9 +66,6 @@ public class MainPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				new MakeGroupPage();
 				setVisible(false);
-				
-//				System.exit(0);
-				
 			}
 			
 		});

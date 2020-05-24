@@ -12,12 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import hgu.csee.oodp.gps.GPURunner;
+import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.User;
 
 public class LoginPage extends JFrame implements ActionListener {
-	private JPanel panel;
 	private JLabel idLb, pwdLb;
 	private JTextField idTf;
 	private JPasswordField pwdPf;
@@ -29,13 +28,13 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	public void makePage() {
 		setLayout(null);
-//		panel = new JPanel();
+
 		idLb = new JLabel("ID: ");
 		pwdLb = new JLabel("Password: ");
 		idTf = new JTextField(10);
 		pwdPf = new JPasswordField(10);
-		loginBtn = new JButton("LogIn");
-		signupBtn = new JButton("SignUp");
+		loginBtn = new JButton("LogIn");	loginBtn.addActionListener(this);
+		signupBtn = new JButton("SignUp");	signupBtn.addActionListener(this);
 
 		idLb.setBounds(50, 50, 80, 30);
 		pwdLb.setBounds(50, 90, 80, 30);
@@ -43,7 +42,7 @@ public class LoginPage extends JFrame implements ActionListener {
 		pwdPf.setBounds(120, 90, 120, 30);
 		loginBtn.setBounds(250, 50, 100, 70);
 		signupBtn.setBounds(50, 130, 300, 35);
-
+		
 		add(idLb);
 		add(pwdLb);
 		add(idTf);
@@ -73,17 +72,18 @@ public class LoginPage extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "User does not exist. Try again");
 			}
 		} else if (e.getSource() == signupBtn) {
-
+				new SignUpPage();
+				setVisible(false);
 		}
 
 	}
 
 	public boolean checkExistUser(String id, String pwd) {
 		boolean isExist = false;
-		for (User user : GPURunner.userList) {
+		for (User user : GPSRunner.userList) {
 			if (user.getId().equals(id) && user.getPassword().equals(pwd)) {
 				isExist = true;
-				GPURunner.user = user;
+				GPSRunner.user = user;
 				break;
 			}
 		}

@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 
-import hgu.csee.oodp.gps.GPURunner;
+import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
-import hgu.csee.oodp.gps.task.MainTask;
+import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
 
@@ -65,7 +66,7 @@ public class GroupMainPage extends JFrame{
 		
 		
 		//get currentGroup
-		List<Group> tempList = GPURunner.groupList;
+		List<Group> tempList = GPSRunner.groupList;
 		for(int i = 0; i < tempList.size(); i++) {
 			if(tempList.get(i).getGroupName().equals(button.getText())) {
 				currGroup = tempList.get(i);

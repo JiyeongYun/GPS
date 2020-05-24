@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import hgu.csee.oodp.gps.group.Group;
 import hgu.csee.oodp.gps.login.LoginPage;
+import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.model.User;
-import hgu.csee.oodp.gps.task.MainTask;
 
-public class GPURunner {
+public class GPSRunner {
 	public static User user;
 	public static List<Group> groupList = new ArrayList<>();
 	public static List<User> userList = new ArrayList<>();

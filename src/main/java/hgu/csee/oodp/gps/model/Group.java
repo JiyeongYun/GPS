@@ -1,10 +1,7 @@
-package hgu.csee.oodp.gps.group;
+package hgu.csee.oodp.gps.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import hgu.csee.oodp.gps.model.User;
-import hgu.csee.oodp.gps.task.MainTask;
 
 public class Group {
 	private int id;

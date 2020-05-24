@@ -1,4 +1,4 @@
-package hgu.csee.oodp.gps.task;
+package hgu.csee.oodp.gps.model;
 
 public class SubTask {
 

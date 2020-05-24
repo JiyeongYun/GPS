@@ -15,9 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import hgu.csee.oodp.gps.group.Group;
 import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.main.MainPage;
+import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.MainTask;
+import hgu.csee.oodp.gps.model.SubTask;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
 

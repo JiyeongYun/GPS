@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import hgu.csee.oodp.gps.GPURunner;
+import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
+import hgu.csee.oodp.gps.model.Group;
 
 public class MakeGroupPage extends JFrame {
 
@@ -38,11 +39,11 @@ public class MakeGroupPage extends JFrame {
 				if(name.contains("/")) {
 					JOptionPane.showMessageDialog(null, "Don't use '/' character! Try again.. ");
 				}else {
-					int size = GPURunner.groupList.size();
+					int size = GPSRunner.groupList.size();
 					ArrayList<String> userList = new ArrayList<>();
-					userList.add(GPURunner.user.getName());
-					GPURunner.user.addGroup(name);
-					GPURunner.groupList.add(new Group(size, name, userList, GPURunner.user.getName() ));
+					userList.add(GPSRunner.user.getName());
+					GPSRunner.user.addGroup(name);
+					GPSRunner.groupList.add(new Group(size, name, userList, GPSRunner.user.getName() ));
 				}
 				new MainPage();
 				setVisible(false);
