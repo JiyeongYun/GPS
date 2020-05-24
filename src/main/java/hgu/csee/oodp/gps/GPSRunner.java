@@ -18,20 +18,18 @@ import hgu.csee.oodp.gps.model.User;
 
 public class GPSRunner {
 	public static User user;
-	public static List<Group> groupList = new ArrayList<>();
+	public static ArrayList<Group> groupList = new ArrayList<>();
 	public static List<User> userList = new ArrayList<>();
 
 	public static void main(String[] args) {
-		
 		getUserList();
 		new LoginPage();
-
 	}
 
 	public static void getUserList() {
 		try {
-			
-			//Read a user data
+
+			// Read a user data
 			File userFile = new File("./data/User.csv");
 			BufferedReader br = new BufferedReader(new FileReader(userFile));
 

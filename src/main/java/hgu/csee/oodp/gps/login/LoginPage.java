@@ -1,6 +1,5 @@
 package hgu.csee.oodp.gps.login;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,7 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -33,8 +31,8 @@ public class LoginPage extends JFrame implements ActionListener {
 		pwdLb = new JLabel("Password: ");
 		idTf = new JTextField(10);
 		pwdPf = new JPasswordField(10);
-		loginBtn = new JButton("LogIn");	loginBtn.addActionListener(this);
-		signupBtn = new JButton("SignUp");	signupBtn.addActionListener(this);
+		loginBtn = new JButton("LogIn");
+		signupBtn = new JButton("SignUp");
 
 		idLb.setBounds(50, 50, 80, 30);
 		pwdLb.setBounds(50, 90, 80, 30);
@@ -42,7 +40,10 @@ public class LoginPage extends JFrame implements ActionListener {
 		pwdPf.setBounds(120, 90, 120, 30);
 		loginBtn.setBounds(250, 50, 100, 70);
 		signupBtn.setBounds(50, 130, 300, 35);
-		
+
+		loginBtn.addActionListener(this);
+		signupBtn.addActionListener(this);
+
 		add(idLb);
 		add(pwdLb);
 		add(idTf);
@@ -72,8 +73,8 @@ public class LoginPage extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "User does not exist. Try again");
 			}
 		} else if (e.getSource() == signupBtn) {
-				new SignUpPage();
-				setVisible(false);
+			new SignUpPage();
+			setVisible(false);
 		}
 
 	}

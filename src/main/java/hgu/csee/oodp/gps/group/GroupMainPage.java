@@ -74,7 +74,7 @@ public class GroupMainPage extends JFrame{
 			}
 		}
 		
-		JLabel listLable = new JLabel("MainTask");
+		JLabel listLable = new JLabel("<MainTask>");
 		
 		// Listing Main Tasks (of the current group)
 		ArrayList<MainTask> mainTaskArr = currGroup.getMainTaskList();	// actual Main Task list

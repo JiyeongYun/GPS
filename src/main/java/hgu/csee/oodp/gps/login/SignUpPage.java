@@ -1,8 +1,10 @@
 package hgu.csee.oodp.gps.login;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -121,6 +123,7 @@ public class SignUpPage extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Fill the blank..");
 				} else {
 					GPSRunner.userList.add(new User(id, pwd, name, gender, phone));
+					saveInFile(id, pwd, name, gender, phone);
 					new LoginPage();
 					setVisible(false);
 				}
@@ -129,6 +132,19 @@ public class SignUpPage extends JFrame implements ActionListener {
 		} else if (e.getSource() == cancelBtn) {
 			new LoginPage();
 			setVisible(false);
+		}
+
+	}
+
+	public void saveInFile(String id, String pwd, String name, char gender, String phone) {
+		File file = new File("./data/User.csv");
+
+		try {
+			FileWriter fw = new FileWriter(file, true);
+			fw.write(id + "," + pwd + "," + name + "," + gender + "," + phone + "\n");
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
