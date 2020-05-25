@@ -1,6 +1,7 @@
 package hgu.csee.oodp.meeting;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class MeetingMainPage extends JFrame{
 		setLayout(new BorderLayout());
 		north_panel = new JPanel();
 		center_panel = new JPanel();
+		center_panel.setLayout(new GridLayout(0,1));
 		south_panel = new JPanel();
 		
 		//fields
@@ -77,7 +79,8 @@ public class MeetingMainPage extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//new MakeMeetingPage(button, currGroup, currMeeting);
+				new ChangeMeetingPage(button, currGroup, currMeeting);
+				setVisible(false);
 			}
 			
 		});
@@ -99,7 +102,7 @@ public class MeetingMainPage extends JFrame{
 			add(south_panel, BorderLayout.SOUTH);
 				
 			setVisible(true);					
-			setSize(400,700);					
+			setSize(400,500);					
 			setLocationRelativeTo(null);		 
 			setResizable(false);				  
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

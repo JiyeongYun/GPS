@@ -6,13 +6,13 @@ import java.util.Calendar;
 public class Meeting {
 	// field members
 	private String title;
-	private Calendar date;	// Calendar class for date
+	private String date;	
 	private String location;
 	private String topic;
 	private String description;
 	private ArrayList<String> relatedFileList;
 	
-	public Meeting(String title, Calendar date, String location, String topic, String description, ArrayList<String> relatedFileList) {
+	public Meeting(String title, String date, String location, String topic, String description, ArrayList<String> relatedFileList) {
 		this.title = title;
 		this.date = date;
 		this.location = location;
@@ -28,10 +28,10 @@ public class Meeting {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Calendar getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Calendar date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public String getLocation() {

@@ -230,7 +230,5 @@ public class GroupMainPage extends JFrame{
 		setResizable(false);				  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	//public void createActualMainTask()
 
 }
