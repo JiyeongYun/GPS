@@ -2,6 +2,11 @@ package hgu.csee.oodp.gps.login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +20,8 @@ import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.User;
 
 public class LoginPage extends JFrame implements ActionListener {
+	public User user = User.getUser();
+	
 	private JLabel idLb, pwdLb;
 	private JTextField idTf;
 	private JPasswordField pwdPf;
@@ -61,6 +68,8 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		
 		if (e.getSource() == loginBtn) {
 			String id = idTf.getText().trim();
 			String pwd = pwdPf.getText().trim();
@@ -81,14 +90,62 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	public boolean checkExistUser(String id, String pwd) {
 		boolean isExist = false;
-		for (User user : GPSRunner.userList) {
-			if (user.getId().equals(id) && user.getPassword().equals(pwd)) {
-				isExist = true;
-				GPSRunner.user = user;
-				break;
+		
+		try {
+
+			// Read a user data
+			File userFile = new File("./data/User.csv");
+			BufferedReader br = new BufferedReader(new FileReader(userFile));
+
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				String[] userInfo = line.split(",");
+				if (userInfo[0].equals(id) && userInfo[1].equals(pwd)) {
+					isExist = true;
+					
+					//set user 
+					user.setId(userInfo[0]);
+					user.setPassword(userInfo[1]);
+					user.setName(userInfo[2]);
+					user.setGender(userInfo[3].charAt(0));
+					user.setPhone(userInfo[4]);
+					
+					break;
+				}
 			}
+
+			br.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 		return isExist;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

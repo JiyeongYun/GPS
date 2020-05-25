@@ -2,7 +2,10 @@ package hgu.csee.oodp.gps.login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -17,7 +20,7 @@ import javax.swing.JTextField;
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.model.User;
 
-public class SignUpPage extends JFrame implements ActionListener {
+public class SignUpPage extends JFrame implements ActionListener {	
 	private String id, pwd, name, phone;
 	private char gender;
 	private JLabel idLb, pwdLb, nameLb, genderLb, phoneLb;
@@ -84,12 +87,30 @@ public class SignUpPage extends JFrame implements ActionListener {
 	}
 
 	public boolean checkExistUser(String id) {
-		for (User user : GPSRunner.userList) {
-			if (user.getId().equals(id)) {
-				return true;
+		boolean isExist = false;
+		
+		try {
+			// Read a user data
+			File userFile = new File("./data/User.csv");
+			BufferedReader br = new BufferedReader(new FileReader(userFile));
+
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				String[] userInfo = line.split(",");
+				if (userInfo[0].equals(id))
+					isExist = true;
 			}
+
+			br.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return false;
+		
+		return isExist;
 	}
 
 	@Override
@@ -122,7 +143,6 @@ public class SignUpPage extends JFrame implements ActionListener {
 				if (id.equals("") || pwd.equals("") || name.equals("") || phone.equals("")) {
 					JOptionPane.showMessageDialog(null, "Fill the blank..");
 				} else {
-					GPSRunner.userList.add(new User(id, pwd, name, gender, phone));
 					saveInFile(id, pwd, name, gender, phone);
 					new LoginPage();
 					setVisible(false);

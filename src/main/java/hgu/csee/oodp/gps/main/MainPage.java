@@ -16,10 +16,13 @@ import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.group.MakeGroupPage;
 import hgu.csee.oodp.gps.login.LoginPage;
 import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.User;
 
 import javax.swing.JLabel;
 
 public class MainPage extends JFrame implements ActionListener {
+	public User user = User.getUser();
+	
 	private ArrayList<JButton> buttonList = new ArrayList<>();
 	private JPanel panel = new JPanel();
 	private JLabel nameLb, groupLb;
@@ -33,7 +36,7 @@ public class MainPage extends JFrame implements ActionListener {
 	public ArrayList<Group> getGroupList() {
 		ArrayList<Group> groups = new ArrayList<>();
 		for (Group group : GPSRunner.groupList) {
-			if (group.getUserList().contains(GPSRunner.user.getName())) {
+			if (group.getUserList().contains(user.getName())) {
 				groups.add(group);
 			}
 		}
@@ -44,7 +47,7 @@ public class MainPage extends JFrame implements ActionListener {
 		setLayout(null);
 		panel.setLayout(new GridLayout(0, 1));
 		
-		nameLb = new JLabel("Name: "+GPSRunner.user.getName());
+		nameLb = new JLabel("Name: "+user.getName());
 		groupLb = new JLabel("My Group List **************");
 		makeGroupBtn = new JButton("Add");
 		logoutBtn = new JButton("Logout");
@@ -104,7 +107,7 @@ public class MainPage extends JFrame implements ActionListener {
 			new MakeGroupPage();
 		} else if (e.getSource() == logoutBtn) {
 			new LoginPage();
-			GPSRunner.user = null;
+			user = null;
 		} else if (e.getSource() == new JButton()){
 			System.out.println("btn name: "+e.getSource());
 			new GroupMainPage((JButton) e.getSource());

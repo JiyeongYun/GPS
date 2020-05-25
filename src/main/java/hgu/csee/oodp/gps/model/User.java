@@ -3,13 +3,27 @@ package hgu.csee.oodp.gps.model;
 import java.util.ArrayList;
 
 public class User {
+	private static User user = null;
+	
 	private String id;
 	private String password;
 	private String name;
 	private char gender;
 	private String phone;
-	private ArrayList<String> groupList;
+	private ArrayList<String> groupList = new ArrayList<>();
 	
+	// Singleton DP
+	
+	private User() {}
+	
+	public static User getUser() {
+		if(user == null) {
+			user = new User();
+		}
+		return user;
+	}
+	
+	/*
 	public User(String id, String password, String name, char gender, String phone) {
 		this.id = id;
 		this.password = password;
@@ -18,6 +32,7 @@ public class User {
 		this.phone = phone;
 		this.groupList = new ArrayList<>();
 	}
+	*/
 
 	public String getId() {
 		return id;

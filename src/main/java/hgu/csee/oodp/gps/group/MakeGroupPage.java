@@ -14,8 +14,10 @@ import javax.swing.JTextField;
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.User;
 
 public class MakeGroupPage extends JFrame {
+	public User user = User.getUser();
 
 	public MakeGroupPage() {
 
@@ -41,9 +43,9 @@ public class MakeGroupPage extends JFrame {
 				}else {
 					int size = GPSRunner.groupList.size();
 					ArrayList<String> userList = new ArrayList<>();
-					userList.add(GPSRunner.user.getName());
-					GPSRunner.user.addGroup(name);
-					GPSRunner.groupList.add(new Group(size, name, userList, GPSRunner.user.getName() ));
+					userList.add(user.getName());
+					user.addGroup(name);
+					GPSRunner.groupList.add(new Group(size, name, userList, user.getName() ));
 				}
 				new MainPage();
 				setVisible(false);
