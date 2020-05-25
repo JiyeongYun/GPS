@@ -29,7 +29,7 @@ public class MakeSubTaskPage extends JFrame {
 		JTextField taskId_tf = new JTextField("Task ID(number)", 15);
 		JTextField taskTitle_tf = new JTextField("Task Title", 15);
 		JTextField taskContent_tf = new JTextField("Task Content", 15);
-		JTextField taskStatus_tf = new JTextField("Task Status", 15);
+		JTextField taskStatus_tf = new JTextField("Task Status(1.To do/2.Doing/3.Done)", 25);
 		JButton ok_btn = new JButton("Create");
 		taskId_tf.setBounds(75, 50, 20, 10);
 		taskTitle_tf.setBounds(75, 50, 20, 10);
@@ -47,16 +47,38 @@ public class MakeSubTaskPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int id = Integer.parseInt(taskId_tf.getText().trim());
-				String title = taskTitle_tf.getText().trim();
-				String content = taskContent_tf.getText().trim();
-				String status = taskStatus_tf.getText().trim();
-				if(id == 0 || title.isEmpty() || content.isEmpty() || status.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Please fill the blanks!");
-				}else {
-					//add new Sub Task to the list
-					currMain.getSubTaskList().add(new SubTask(id, title, content, status));
+				String title = "";
+				String content = "";
+				String status = "";
+				int statusNum = 0;
+				int id = 0;
+				
+				try {	// catching wrong input
+					id = Integer.parseInt(taskId_tf.getText().trim());
+					title = taskTitle_tf.getText().trim();
+					content = taskContent_tf.getText().trim();
+					statusNum = Integer.parseInt(taskStatus_tf.getText().trim());
+					
+					if(statusNum >= 1 && statusNum <= 3) {
+						if(statusNum == 1) status = "To do";
+						if(statusNum == 2) status = "Doing";
+						if(statusNum == 3) status = "Done";
+					}
+					else throw new Exception();
+					
+					if(title.isEmpty() || content.isEmpty()) {
+						throw new Exception();
+					}
+					else {
+						//add new Sub Task to the list
+						currMain.getSubTaskList().add(new SubTask(id, title, content, status));
+					}
+					
+				}catch(Exception e1) {
+					JOptionPane.showMessageDialog(null, "Wrong input!");
+					setVisible(false);
 				}
+				
 				new MainTaskPage(button, currGroup, mainTitle);
 				setVisible(false);
 			}

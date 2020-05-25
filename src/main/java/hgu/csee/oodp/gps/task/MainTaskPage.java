@@ -103,9 +103,25 @@ public class MainTaskPage extends JFrame{
 				for(int i = 0; i < currMain.getSubTaskList().size(); i++) {
 					if(inputField.getText().trim().equals(currMain.getSubTaskList().get(i).getTaskTitle())){
 						isIn = true;
-						temp = currMain.getSubTaskList().get(i);
-						String changeStatus = JOptionPane.showInputDialog("Status? (To do, Doing, Done ):");
-						temp.setStatus(changeStatus);
+						temp = currMain.getSubTaskList().get(i);	// curretn sub task
+						
+						int statusNum = 0;	//numeric input
+						String changeStatus = "";
+						try {
+							statusNum = Integer.parseInt(JOptionPane.showInputDialog("Task Status(1.To do/2.Doing/3.Done):"));
+			
+							if(statusNum >= 1 && statusNum <= 3) {
+								if(statusNum == 1) changeStatus = "To do";
+								if(statusNum == 2) changeStatus = "Doing";
+								if(statusNum == 3) changeStatus = "Done";
+							}
+							else throw new Exception();
+								
+							temp.setStatus(changeStatus);
+						} catch(Exception e1) {
+							JOptionPane.showMessageDialog(null, "Wrong input!");
+						}
+						
 						new MainTaskPage(button, currGroup, currTitle);
 						setVisible(false);
 					}

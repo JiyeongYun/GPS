@@ -45,15 +45,15 @@ public class MainPage extends JFrame implements ActionListener {
 		panel.setLayout(new GridLayout(0, 1));
 		
 		nameLb = new JLabel("Name: "+GPSRunner.user.getName());
-		groupLb = new JLabel("My Group List ***************");
+		groupLb = new JLabel("My Group List **************");
 		makeGroupBtn = new JButton("Add");
 		logoutBtn = new JButton("Logout");
 		
 		panel.setBounds(0,90,500,410);
 		nameLb.setBounds(50,10,200,50);
 		groupLb.setBounds(50,40,200,50);
-		makeGroupBtn.setBounds(330,40,70,50);
-		logoutBtn.setBounds(410,40,70,50);
+		makeGroupBtn.setBounds(330,40,60,50);
+		logoutBtn.setBounds(400,40,80,50);
 		
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
@@ -63,7 +63,7 @@ public class MainPage extends JFrame implements ActionListener {
 			JButton btn = new JButton(group.getGroupName());
 			btn.setMinimumSize(new Dimension(100,50));
 			btn.setMaximumSize(new Dimension(500,70));
-//			buttonList.add(btn);
+			buttonList.add(btn);
 			panel.add(btn);
 		}
 
