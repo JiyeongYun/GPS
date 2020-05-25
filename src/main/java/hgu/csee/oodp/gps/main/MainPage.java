@@ -24,7 +24,6 @@ public class MainPage extends JFrame implements ActionListener {
 	public User user = User.getUser();
 	
 	private ArrayList<JButton> buttonList = new ArrayList<>();
-	private JPanel panel = new JPanel();
 	private JLabel nameLb, groupLb;
 	private JButton makeGroupBtn, logoutBtn;
 
@@ -45,14 +44,12 @@ public class MainPage extends JFrame implements ActionListener {
 
 	public void makePage() {
 		setLayout(null);
-		panel.setLayout(new GridLayout(0, 1));
 		
 		nameLb = new JLabel("Name: "+user.getName());
 		groupLb = new JLabel("My Group List **************");
 		makeGroupBtn = new JButton("Add");
 		logoutBtn = new JButton("Logout");
 		
-		panel.setBounds(0,90,500,410);
 		nameLb.setBounds(50,10,200,50);
 		groupLb.setBounds(50,40,200,50);
 		makeGroupBtn.setBounds(330,40,60,50);
@@ -61,13 +58,12 @@ public class MainPage extends JFrame implements ActionListener {
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
 
-		// add the button on panel
-		for (Group group : GPSRunner.groupList) {
+		for (int i = 0; i < GPSRunner.groupList.size(); i++) {
+			Group group  = GPSRunner.groupList.get(i);
 			JButton btn = new JButton(group.getGroupName());
-			btn.setMinimumSize(new Dimension(100,50));
-			btn.setMaximumSize(new Dimension(500,70));
+			btn.setBounds(150,110+(i*50),200,50);
 			buttonList.add(btn);
-			panel.add(btn);
+			this.add(btn);
 		}
 
 		for (JButton btn : buttonList) {
@@ -85,7 +81,6 @@ public class MainPage extends JFrame implements ActionListener {
 		add(groupLb);
 		add(makeGroupBtn);
 		add(logoutBtn);
-		add(panel);
 
 		setTitle("*** Main Page ***");
 		setVisible(true);
