@@ -1,11 +1,8 @@
 package hgu.csee.oodp.meeting;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,7 +12,7 @@ import javax.swing.JTextField;
 import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.model.Group;
 
-public class MakeMeetingPage extends JFrame{
+public class ChangeMeetingPage extends JFrame{
 	private JLabel topLabel;
 	private JTextField titleField;
 	private JTextField dateField;
@@ -26,7 +23,7 @@ public class MakeMeetingPage extends JFrame{
 	private JButton back_btn;
 	private JButton add_btn;
 	
-	public MakeMeetingPage(JButton button, Group currGroup) {
+	public ChangeMeetingPage(JButton button, Group currGroup) {
 		makeMakeMeetingPage(button, currGroup);
 	}
 

@@ -10,16 +10,14 @@ public class Meeting {
 	private String location;
 	private String topic;
 	private String description;
-	private String conclusion;
 	private ArrayList<String> relatedFileList;
 	
-	public Meeting(String title, Calendar date, String location, String topic, String description, String conclusion, ArrayList<String> relatedFileList) {
+	public Meeting(String title, Calendar date, String location, String topic, String description, ArrayList<String> relatedFileList) {
 		this.title = title;
 		this.date = date;
 		this.location = location;
 		this.topic = topic;
 		this.description = description;
-		this.conclusion = conclusion;
 		this.relatedFileList = relatedFileList;
 	}
 	
@@ -53,12 +51,6 @@ public class Meeting {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getConclusion() {
-		return conclusion;
-	}
-	public void setConclusion(String conclusion) {
-		this.conclusion = conclusion;
 	}
 	public ArrayList<String> getRelatedFileList() {
 		return relatedFileList;

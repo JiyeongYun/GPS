@@ -26,6 +26,8 @@ import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.model.Meeting;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
+import hgu.csee.oodp.meeting.MakeMeetingPage;
+import hgu.csee.oodp.meeting.MeetingMainPage;
 
 public class GroupMainPage extends JFrame{
 	Group currGroup = null;
@@ -132,6 +134,36 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(search_btn2);
 		JButton add_btn2 = new JButton("add");
 		south_panel.add(add_btn2);
+		
+		search_btn2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean isIn = false;
+				String tempTitle = inputField2.getText().trim();
+				Meeting tempMeeting;
+				for(int i = 0; i < currGroup.getMeetingList().size(); i++) {
+					if(tempTitle.equals(currGroup.getMeetingList().get(i).getTitle())) {
+						tempMeeting = currGroup.getMeetingList().get(i);
+						isIn = true;
+						new MeetingMainPage(button, currGroup, tempMeeting);
+						setVisible(false);
+						break;
+					}
+				}
+				if(!isIn) JOptionPane.showMessageDialog(null, "No such Meeting!");
+			}
+		});
+		
+		add_btn2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MakeMeetingPage(button, currGroup);
+				setVisible(false);
+			}
+			
+		});
 		
 		// For Main Task(
 		JLabel inputLable = new JLabel("Which Main Task?: ");
