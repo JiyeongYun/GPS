@@ -1,9 +1,8 @@
 package hgu.csee.oodp.gps.model;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting>{
 	// field members
 	private String title;
 	private String date;	
@@ -57,6 +56,13 @@ public class Meeting {
 	}
 	public void setRelatedFileList(ArrayList<String> relatedFileList) {
 		this.relatedFileList = relatedFileList;
+	}
+
+	//compareTo method for sorting
+	@Override
+	public int compareTo(Meeting m) {
+		if(this.date.equals(m.date)) return 0;
+		else return (this.date.compareTo(m.date));
 	}
 	
 }

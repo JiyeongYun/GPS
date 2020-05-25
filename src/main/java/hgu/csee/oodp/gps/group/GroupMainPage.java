@@ -8,6 +8,7 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -99,7 +100,7 @@ public class GroupMainPage extends JFrame{
 		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();	// actual Main Task list
 		String[] titleList2 = new String[meetingArr.size()];	//temp title list
 		for(int i = 0; i < meetingArr.size(); i++) {
-			titleList2[i] = meetingArr.get(i).getTitle();
+			titleList2[i] = meetingArr.get(i).getTitle() + " : " + meetingArr.get(i).getDate();
 		}
 		JList list2 = new JList(titleList2);
 		west_panel.add(listLable2);
@@ -123,7 +124,8 @@ public class GroupMainPage extends JFrame{
 		
 		
 		// south_panel
-		south_panel.setLayout(new GridLayout(3,4,5,10));
+		////////////////
+		south_panel.setLayout(new GridLayout(3,5,5,10));
 		
 		// For Meeting
 		JLabel inputLable2 = new JLabel("Which Meeting?: ");
@@ -134,6 +136,8 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(search_btn2);
 		JButton add_btn2 = new JButton("add");
 		south_panel.add(add_btn2);
+		JButton sort_btn = new JButton("sort"); // show the list sorted(accodring to the time)
+		south_panel.add(sort_btn);
 		
 		search_btn2.addActionListener(new ActionListener() {
 
@@ -165,6 +169,17 @@ public class GroupMainPage extends JFrame{
 			
 		});
 		
+		sort_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Collections.sort(currGroup.getMeetingList());
+				new GroupMainPage(button);
+				setVisible(false);
+			}
+			
+		});
+		
 		// For Main Task(
 		JLabel inputLable = new JLabel("Which Main Task?: ");
 		south_panel.add(inputLable);
@@ -174,6 +189,7 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(search_btn);
 		JButton add_btn = new JButton("add");
 		south_panel.add(add_btn);
+		south_panel.add(new JLabel(""));	// blank space
 		
 		search_btn.addActionListener(new ActionListener() { // -> to Main Task Page
 
@@ -215,6 +231,8 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(search_btn3);
 		JButton add_btn3 = new JButton("add");
 		south_panel.add(add_btn3);
+		JButton show_btn2 = new JButton("show");
+		south_panel.add(show_btn2);
 		
 		// Layout setting
 		setTitle("*** Group: "+ currGroup.getGroupName() + " ***");
@@ -225,7 +243,7 @@ public class GroupMainPage extends JFrame{
 		add(south_panel, BorderLayout.SOUTH);
 		
 		setVisible(true);					
-		setSize(500,400);					
+		setSize(600,400);					
 		setLocationRelativeTo(null);		 
 		setResizable(false);				  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
