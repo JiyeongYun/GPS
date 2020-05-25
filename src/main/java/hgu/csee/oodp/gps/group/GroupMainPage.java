@@ -1,7 +1,9 @@
 package hgu.csee.oodp.gps.group;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GraphicsConfiguration;
+import java.awt.GridLayout;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +23,7 @@ import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.MainTask;
+import hgu.csee.oodp.gps.model.Meeting;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
 
@@ -36,11 +39,14 @@ public class GroupMainPage extends JFrame{
 		JPanel top_panel = new JPanel();
 		JPanel center_panel = new JPanel();
 		JPanel south_panel = new JPanel();
+		JPanel west_panel = new JPanel();
+		JPanel east_panel = new JPanel();
 		//top_panel.setBounds(0,0,500,100);
 		//center_panel.setBounds(0,0,500,100);
 		//south_panel.setBounds(0,0,500,100);
 		
 		// top_panel
+		///////////////////////
 		System.out.println("button name: "+ button.getText());
 		JLabel groupTitle = new JLabel(button.getText());
 		JButton back_btn = new JButton("뒤로");	
@@ -60,11 +66,6 @@ public class GroupMainPage extends JFrame{
 			
 		});
 		
-		// center_panel
-		///////////////////////
-		///////////////////////
-		
-		
 		//get currentGroup
 		List<Group> tempList = GPSRunner.groupList;
 		for(int i = 0; i < tempList.size(); i++) {
@@ -74,9 +75,12 @@ public class GroupMainPage extends JFrame{
 			}
 		}
 		
-		JLabel listLable = new JLabel("<MainTask>");
 		
-		// Listing Main Tasks (of the current group)
+		// center_panel (Main Tasks)
+		///////////////////////
+		///////////////////////
+		JLabel listLable = new JLabel("  <MainTask>  ");
+		
 		ArrayList<MainTask> mainTaskArr = currGroup.getMainTaskList();	// actual Main Task list
 		String[] titleList = new String[mainTaskArr.size()];	//temp title list
 		for(int i = 0; i < mainTaskArr.size(); i++) {
@@ -86,11 +90,53 @@ public class GroupMainPage extends JFrame{
 		center_panel.add(listLable);
 		center_panel.add(list);
 		
-		// south_panel
+		// west panel(Meeting)
+		///////////////////////
+		JLabel listLable2 = new JLabel("  <Meeting>  ");
 		
+		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();	// actual Main Task list
+		String[] titleList2 = new String[meetingArr.size()];	//temp title list
+		for(int i = 0; i < meetingArr.size(); i++) {
+			titleList2[i] = meetingArr.get(i).getTitle();
+		}
+		JList list2 = new JList(titleList2);
+		west_panel.add(listLable2);
+		west_panel.add(list2);
+		
+		// east panel(Record)
+		///////////////////////
+		JLabel listLable3 = new JLabel("  <Record>  ");
+		
+		/*
+		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();	// actual Main Task list
+		String[] titleList2 = new String[meetingArr.size()];	//temp title list
+		for(int i = 0; i < meetingArr.size(); i++) {
+			titleList2[i] = meetingArr.get(i).getTitle();
+		}
+		JList list2 = new JList(titleList2);
+		*/
+		east_panel.add(listLable3);
+		//west_panel.add(list2);
+		
+		
+		
+		// south_panel
+		south_panel.setLayout(new GridLayout(3,4,5,10));
+		
+		// For Meeting
+		JLabel inputLable2 = new JLabel("Which Meeting?: ");
+		south_panel.add(inputLable2);
+		JTextField inputField2 = new JTextField("Input Here");
+		south_panel.add(inputField2);
+		JButton search_btn2 = new JButton("search");	
+		south_panel.add(search_btn2);
+		JButton add_btn2 = new JButton("add");
+		south_panel.add(add_btn2);
+		
+		// For Main Task(
 		JLabel inputLable = new JLabel("Which Main Task?: ");
 		south_panel.add(inputLable);
-		JTextField inputField = new JTextField("          Input Here          ");
+		JTextField inputField = new JTextField("Input Here");
 		south_panel.add(inputField);
 		JButton search_btn = new JButton("search");	
 		south_panel.add(search_btn);
@@ -128,13 +174,26 @@ public class GroupMainPage extends JFrame{
 			}
 		});
 		
+		// For Record
+		JLabel inputLable3 = new JLabel("Which Record?: ");
+		south_panel.add(inputLable3);
+		JTextField inputField3 = new JTextField("Input Here");
+		south_panel.add(inputField3);
+		JButton search_btn3 = new JButton("search");	
+		south_panel.add(search_btn3);
+		JButton add_btn3 = new JButton("add");
+		south_panel.add(add_btn3);
+		
+		// Layout setting
 		setTitle("*** Group: "+ currGroup.getGroupName() + " ***");
 		add(top_panel, BorderLayout.NORTH);	
+		add(west_panel, BorderLayout.WEST);
 		add(center_panel, BorderLayout.CENTER);	
+		add(east_panel, BorderLayout.EAST);
 		add(south_panel, BorderLayout.SOUTH);
 		
 		setVisible(true);					
-		setSize(500,300);					
+		setSize(500,400);					
 		setLocationRelativeTo(null);		 
 		setResizable(false);				  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

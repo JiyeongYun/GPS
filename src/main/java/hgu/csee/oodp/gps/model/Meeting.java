@@ -13,6 +13,16 @@ public class Meeting {
 	private String conclusion;
 	private ArrayList<String> relatedFileList;
 	
+	public Meeting(String title, Calendar date, String location, String topic, String description, String conclusion, ArrayList<String> relatedFileList) {
+		this.title = title;
+		this.date = date;
+		this.location = location;
+		this.topic = topic;
+		this.description = description;
+		this.conclusion = conclusion;
+		this.relatedFileList = relatedFileList;
+	}
+	
 	// getter & setter
 	public String getTitle() {
 		return title;

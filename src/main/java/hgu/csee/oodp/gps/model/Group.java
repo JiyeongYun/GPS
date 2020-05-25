@@ -9,6 +9,7 @@ public class Group {
 	private ArrayList<String> userList = new ArrayList<>();
 	private String master;
 	private ArrayList<MainTask> mainTaskList = new ArrayList<>();
+	private ArrayList<Meeting> meetingList = new ArrayList<>();
 	
 	public Group(int id, String groupName, ArrayList<String> userList, String master) {
 		super();
@@ -25,6 +26,16 @@ public class Group {
 		this.userList = (ArrayList<String>) userList.clone();			// clone only value
 		this.master = master;
 		this.mainTaskList = (ArrayList<MainTask>) mainTaskList.clone();	// clone only value
+	}
+	
+	public Group(int id, String groupName, ArrayList<String> userList, String master, ArrayList<MainTask> mainTaskList, ArrayList<Meeting> meetingList) {
+		super();
+		this.id = id;
+		this.groupName = groupName;
+		this.userList = (ArrayList<String>) userList.clone();			// clone only value
+		this.master = master;
+		this.mainTaskList = (ArrayList<MainTask>) mainTaskList.clone();	// clone only value
+		this.meetingList = (ArrayList<Meeting>) meetingList.clone();
 	}
 
 	public int getId() {
@@ -65,6 +76,14 @@ public class Group {
 
 	public void setMainTaskList(ArrayList<MainTask> mainTaskList) {
 		this.mainTaskList = mainTaskList;
+	}
+
+	public ArrayList<Meeting> getMeetingList() {
+		return meetingList;
+	}
+
+	public void setMeetingList(ArrayList<Meeting> meetingList) {
+		this.meetingList = meetingList;
 	}
 	
 
