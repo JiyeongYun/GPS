@@ -29,7 +29,7 @@ import javax.swing.JLabel;
 public class MainPage extends JFrame implements ActionListener {
 	public User user = User.getUser();
 	public Color color = Color.LIGHT_GRAY;
-	
+
 	private ChangeBG spring = new Spring();
 	private ChangeBG summer = new Summer();
 	private ChangeBG automn = new Automn();
@@ -69,13 +69,13 @@ public class MainPage extends JFrame implements ActionListener {
 
 		nameLb.setBounds(50, 10, 200, 50);
 		groupLb.setBounds(50, 40, 200, 50);
-		moodLb.setBounds(40,110, 90,30);
+		moodLb.setBounds(40, 110, 90, 30);
 		makeGroupBtn.setBounds(330, 40, 60, 50);
 		logoutBtn.setBounds(400, 40, 80, 50);
-		springBtn.setBounds(40,150,90,30);
-		summerBtn.setBounds(40,200,90,30);
-		automnBtn.setBounds(40,250,90,30);
-		winterBtn.setBounds(40,300,90,30);
+		springBtn.setBounds(40, 150, 90, 30);
+		summerBtn.setBounds(40, 200, 90, 30);
+		automnBtn.setBounds(40, 250, 90, 30);
+		winterBtn.setBounds(40, 300, 90, 30);
 
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
@@ -83,7 +83,6 @@ public class MainPage extends JFrame implements ActionListener {
 		summerBtn.addActionListener(this);
 		automnBtn.addActionListener(this);
 		winterBtn.addActionListener(this);
-		
 
 		for (int i = 0; i < GPSRunner.groupList.size(); i++) {
 			Group group = GPSRunner.groupList.get(i);
@@ -100,7 +99,7 @@ public class MainPage extends JFrame implements ActionListener {
 				public void actionPerformed(ActionEvent e) {
 					gotoGroupMainPage(btn);
 				}
-				
+
 			});
 		}
 
@@ -122,7 +121,7 @@ public class MainPage extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	
+
 	public void setStrateDP() {
 		spring.setChangableBGStrategy(new SpringStrategy());
 		summer.setChangableBGStrategy(new SummerStrategy());
@@ -143,24 +142,21 @@ public class MainPage extends JFrame implements ActionListener {
 		} else if (e.getSource() == logoutBtn) {
 			new LoginPage();
 			user = null;
-//			dispose();
 			setVisible(false);
-		} else if(e.getSource() == springBtn) {
+		} else if (e.getSource() == springBtn) {
 			System.out.println("spring btn..");
 			color = spring.changeBackground();
-		} else if(e.getSource() == summerBtn) {
+		} else if (e.getSource() == summerBtn) {
 			System.out.println("summer btn..");
 			color = summer.changeBackground();
-		} else if(e.getSource() == automnBtn) {
+		} else if (e.getSource() == automnBtn) {
 			System.out.println("automn btn..");
 			color = automn.changeBackground();
-		} else if(e.getSource() == winterBtn) {
+		} else if (e.getSource() == winterBtn) {
 			System.out.println("winter btn..");
 			color = winter.changeBackground();
 		}
-		
 		getContentPane().setBackground(color);
-		
 	}
 
 }
