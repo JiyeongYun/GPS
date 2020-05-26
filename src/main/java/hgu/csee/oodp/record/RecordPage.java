@@ -36,5 +36,4 @@ public class RecordPage extends JFrame{
 		setResizable(false);				  
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
 }

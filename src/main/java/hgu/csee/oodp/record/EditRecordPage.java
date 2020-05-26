@@ -61,7 +61,7 @@ public class EditRecordPage extends AbstractRecordpage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new GroupMainPage(button);
-				currPage.setVisible(false);
+				currPage.dispose();
 			}
 			
 		});
