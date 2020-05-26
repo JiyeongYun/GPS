@@ -28,6 +28,7 @@ import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.model.Meeting;
+import hgu.csee.oodp.gps.model.Record;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
 import hgu.csee.oodp.meeting.MakeMeetingPage;
@@ -101,7 +102,7 @@ public class GroupMainPage extends JFrame{
 		///////////////////////
 		JLabel listLable2 = new JLabel("  <Meeting>  ");
 		
-		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();	// actual Main Task list
+		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();
 		String[] titleList2 = new String[meetingArr.size()];	//temp title list
 		for(int i = 0; i < meetingArr.size(); i++) {
 			titleList2[i] = meetingArr.get(i).getTitle() + " : " + meetingArr.get(i).getDate();
@@ -114,17 +115,14 @@ public class GroupMainPage extends JFrame{
 		///////////////////////
 		JLabel listLable3 = new JLabel("  <Record>  ");
 		
-		/*
-		ArrayList<Meeting> meetingArr = currGroup.getMeetingList();	// actual Main Task list
-		String[] titleList2 = new String[meetingArr.size()];	//temp title list
-		for(int i = 0; i < meetingArr.size(); i++) {
-			titleList2[i] = meetingArr.get(i).getTitle();
+		ArrayList<Record> recordArr = currGroup.getRecordList();
+		String[] titleList3 = new String[recordArr.size()];	//temp title list
+		for(int i = 0; i < recordArr.size(); i++) {
+			titleList3[i] = recordArr.get(i).getTitle() + " : " + recordArr.get(i).getDate();
 		}
-		JList list2 = new JList(titleList2);
-		*/
-		east_panel.add(listLable3);
-		//west_panel.add(list2);
-		
+		JList list3 = new JList(titleList3);
+		west_panel.add(listLable3);
+		west_panel.add(list3);
 		
 		
 		// south_panel
