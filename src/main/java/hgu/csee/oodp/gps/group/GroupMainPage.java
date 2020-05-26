@@ -34,6 +34,7 @@ import hgu.csee.oodp.gps.task.MakeMainTaskPage;
 import hgu.csee.oodp.meeting.MakeMeetingPage;
 import hgu.csee.oodp.meeting.MeetingMainPage;
 import hgu.csee.oodp.meeting.Popup;
+import hgu.csee.oodp.record.RecordPage;
 
 public class GroupMainPage extends JFrame{
 	Group currGroup = null;
@@ -235,6 +236,36 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(add_btn3);
 		JButton show_btn2 = new JButton("show");
 		south_panel.add(show_btn2);
+		
+		search_btn3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean isIn = false;
+				String tempTitle = inputField3.getText().trim();
+				Record tempRecord;
+				for(int i = 0; i < currGroup.getRecordList().size(); i++) {
+					if(tempTitle.equals(currGroup.getRecordList().get(i).getTitle())) {
+						tempRecord = currGroup.getRecordList().get(i);
+						isIn = true;
+						new RecordPage(button, currGroup, tempRecord);
+						setVisible(false);
+						break;
+					}
+				}
+				if(!isIn) JOptionPane.showMessageDialog(null, "No such Record!");
+			}
+		});
+		
+		add_btn3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new RecordPage(button, currGroup, null);	// the Record input is null(for template DP)
+				setVisible(false);
+			}
+			
+		});
 		
 		// Layout setting
 		setTitle("*** Group: "+ currGroup.getGroupName() + " ***");
