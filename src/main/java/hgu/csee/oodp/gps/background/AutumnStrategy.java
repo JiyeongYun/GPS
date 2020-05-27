@@ -2,7 +2,7 @@ package hgu.csee.oodp.gps.background;
 
 import java.awt.Color;
 
-public class AutomnStrategy implements ChangableBGStrategy {
+public class AutumnStrategy implements ChangableBGStrategy {
 
 	@Override
 	public Color changeBackground() {

@@ -21,7 +21,7 @@ import hgu.csee.oodp.gps.model.User;
 
 public class LoginPage extends JFrame implements ActionListener {
 	public User user = User.getUser();
-	
+
 	private JLabel idLb, pwdLb;
 	private JTextField idTf;
 	private JPasswordField pwdPf;
@@ -68,8 +68,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		
+
 		if (e.getSource() == loginBtn) {
 			String id = idTf.getText().trim();
 			String pwd = pwdPf.getText().trim();
@@ -90,7 +89,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
 	public boolean checkExistUser(String id, String pwd) {
 		boolean isExist = false;
-		
+
 		try {
 
 			// Read a user data
@@ -103,14 +102,14 @@ public class LoginPage extends JFrame implements ActionListener {
 				String[] userInfo = line.split(",");
 				if (userInfo[0].equals(id) && userInfo[1].equals(pwd)) {
 					isExist = true;
-					
-					//set user 
+
+					// set user
 					user.setId(userInfo[0]);
 					user.setPassword(userInfo[1]);
 					user.setName(userInfo[2]);
 					user.setGender(userInfo[3].charAt(0));
 					user.setPhone(userInfo[4]);
-					
+
 					break;
 				}
 			}
@@ -122,30 +121,8 @@ public class LoginPage extends JFrame implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return isExist;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

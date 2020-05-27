@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import hgu.csee.oodp.gps.GPSRunner;
-import hgu.csee.oodp.gps.background.Automn;
-import hgu.csee.oodp.gps.background.AutomnStrategy;
+import hgu.csee.oodp.gps.background.Autumn;
+import hgu.csee.oodp.gps.background.AutumnStrategy;
 import hgu.csee.oodp.gps.background.ChangeBG;
 import hgu.csee.oodp.gps.background.Spring;
 import hgu.csee.oodp.gps.background.SpringStrategy;
@@ -32,11 +32,11 @@ public class MainPage extends JFrame implements ActionListener {
 
 	private ChangeBG spring = new Spring();
 	private ChangeBG summer = new Summer();
-	private ChangeBG automn = new Automn();
+	private ChangeBG autumn = new Autumn();
 	private ChangeBG winter = new Winter();
 	private ArrayList<JButton> buttonList = new ArrayList<>();
 	private JLabel nameLb, groupLb, moodLb;
-	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, automnBtn, winterBtn;
+	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn;
 
 	public MainPage() {
 		GPSRunner.groupList = getGroupList();
@@ -64,7 +64,7 @@ public class MainPage extends JFrame implements ActionListener {
 		logoutBtn = new JButton("Logout");
 		springBtn = new JButton("Spring");
 		summerBtn = new JButton("Summer");
-		automnBtn = new JButton("Automn");
+		autumnBtn = new JButton("Autumn");
 		winterBtn = new JButton("Winter");
 
 		nameLb.setBounds(50, 10, 200, 50);
@@ -74,14 +74,14 @@ public class MainPage extends JFrame implements ActionListener {
 		logoutBtn.setBounds(400, 40, 80, 50);
 		springBtn.setBounds(40, 150, 90, 30);
 		summerBtn.setBounds(40, 200, 90, 30);
-		automnBtn.setBounds(40, 250, 90, 30);
+		autumnBtn.setBounds(40, 250, 90, 30);
 		winterBtn.setBounds(40, 300, 90, 30);
 
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
 		springBtn.addActionListener(this);
 		summerBtn.addActionListener(this);
-		automnBtn.addActionListener(this);
+		autumnBtn.addActionListener(this);
 		winterBtn.addActionListener(this);
 
 		for (int i = 0; i < GPSRunner.groupList.size(); i++) {
@@ -110,7 +110,7 @@ public class MainPage extends JFrame implements ActionListener {
 		add(logoutBtn);
 		add(springBtn);
 		add(summerBtn);
-		add(automnBtn);
+		add(autumnBtn);
 		add(winterBtn);
 
 		setTitle("*** Main Page ***");
@@ -125,7 +125,7 @@ public class MainPage extends JFrame implements ActionListener {
 	public void setStrateDP() {
 		spring.setChangableBGStrategy(new SpringStrategy());
 		summer.setChangableBGStrategy(new SummerStrategy());
-		automn.setChangableBGStrategy(new AutomnStrategy());
+		autumn.setChangableBGStrategy(new AutumnStrategy());
 		winter.setChangableBGStrategy(new WinterStrategy());
 	}
 
@@ -144,16 +144,12 @@ public class MainPage extends JFrame implements ActionListener {
 			user = null;
 			setVisible(false);
 		} else if (e.getSource() == springBtn) {
-			System.out.println("spring btn..");
 			color = spring.changeBackground();
 		} else if (e.getSource() == summerBtn) {
-			System.out.println("summer btn..");
 			color = summer.changeBackground();
-		} else if (e.getSource() == automnBtn) {
-			System.out.println("automn btn..");
-			color = automn.changeBackground();
+		} else if (e.getSource() == autumnBtn) {
+			color = autumn.changeBackground();
 		} else if (e.getSource() == winterBtn) {
-			System.out.println("winter btn..");
 			color = winter.changeBackground();
 		}
 		getContentPane().setBackground(color);

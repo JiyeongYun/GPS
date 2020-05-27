@@ -1,5 +1,5 @@
 package hgu.csee.oodp.gps.background;
 
-public class Automn extends ChangeBG{
+public class Autumn extends ChangeBG{
 
 }
