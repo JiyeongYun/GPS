@@ -76,7 +76,7 @@ public class ChangeMeetingPage extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				chagneMeeting(button, currGroup, currMeeting);
+				changeMeeting(button, currGroup, currMeeting);
 				new MeetingMainPage(button, currGroup, currMeeting);
 				setVisible(false);
 			}
@@ -93,7 +93,7 @@ public class ChangeMeetingPage extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void chagneMeeting(JButton button, Group currGroup, Meeting currMeeting) {
+	public void changeMeeting(JButton button, Group currGroup, Meeting currMeeting) {
 		try {
 			if(titleField.getText().isBlank() || dateField.getText().isBlank() || locationField.getText().isBlank() 
 					|| topicField.getText().isBlank() || descriptionField.getText().isBlank() || fileListField.getText().isBlank()) {
