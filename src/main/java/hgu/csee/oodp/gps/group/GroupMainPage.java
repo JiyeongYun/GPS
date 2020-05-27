@@ -234,8 +234,8 @@ public class GroupMainPage extends JFrame{
 		south_panel.add(search_btn3);
 		JButton add_btn3 = new JButton("add");
 		south_panel.add(add_btn3);
-		JButton show_btn2 = new JButton("show");
-		south_panel.add(show_btn2);
+		JButton sort_btn2 = new JButton("sort");
+		south_panel.add(sort_btn2);
 		
 		search_btn3.addActionListener(new ActionListener() {
 
@@ -265,6 +265,16 @@ public class GroupMainPage extends JFrame{
 				setVisible(false);
 			}
 			
+		});
+		
+		sort_btn2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Collections.sort(currGroup.getRecordList());
+				new GroupMainPage(button);
+				setVisible(false);
+			}
 		});
 		
 		// Layout setting

@@ -29,7 +29,7 @@ public class RecordPage extends JFrame{
 	}
 
 	public void layoutSetup() {//layout setting
-		setTitle("*** Create a Meeting ***");
+		setTitle("*** Record ***");
 		setVisible(true);					
 		setSize(400,600);					
 		setLocationRelativeTo(null);		 

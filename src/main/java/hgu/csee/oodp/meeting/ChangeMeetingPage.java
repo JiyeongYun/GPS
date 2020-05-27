@@ -84,7 +84,7 @@ public class ChangeMeetingPage extends JFrame{
 		
 	
 		// Layout setting
-		setTitle("*** Create a Meeting ***");
+		setTitle("*** Edit a Meeting ***");
 					
 		setVisible(true);					
 		setSize(400,800);					
