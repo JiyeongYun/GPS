@@ -2,6 +2,7 @@ package hgu.csee.oodp.record;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
@@ -12,19 +13,19 @@ import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.Record;
 
-public class EditRecordPage extends AbstractRecordpage {
+public class MakeRecord extends AbstractRecordPage{
 
 	@Override
 	public void fieldSetup(JButton button, Group currGroup, Record currRecord, RecordPage currPage) {
-		currPage.titleField = new JTextField(currRecord.getTitle());
+		currPage.titleField = new JTextField("Title");
 		currPage.add(currPage.titleField);
-		currPage.dateField = new JTextField(currRecord.getDate());
+		currPage.dateField = new JTextField("Date(yyyy-mm-dd-hh-mm)");
 		currPage.add(currPage.dateField);
-		currPage.topicField = new JTextField(currRecord.getTopic());
+		currPage.topicField = new JTextField("Topic");
 		currPage.add(currPage.topicField);
-		currPage.descriptionField = new JTextField(currRecord.getDescription());
+		currPage.descriptionField = new JTextField("Description");
 		currPage.add(currPage.descriptionField);
-		currPage.exec_btn = new JButton(" edit ");
+		currPage.exec_btn = new JButton(" add ");
 		currPage.add(currPage.exec_btn);
 		currPage.back_btn = new JButton(" 뒤로 ");
 		currPage.add(currPage.back_btn);
@@ -45,15 +46,12 @@ public class EditRecordPage extends AbstractRecordpage {
 					JOptionPane.showMessageDialog(null, "Wrong Input!");
 				}
 				
-				if(flag) {
-					currRecord.setTitle(currPage.titleField.getText().trim());
-					currRecord.setDate(currPage.dateField.getText().trim());
-					currRecord.setTopic(currPage.topicField.getText().trim());
-					currRecord.setDescription(currPage.descriptionField.getText().trim());
-				}
-					new GroupMainPage(button);
-					currPage.dispose();
+				if(flag) currGroup.getRecordList().add(new Record(currPage.titleField.getText().trim(), currPage.dateField.getText().trim(), currPage.topicField.getText().trim(), currPage.descriptionField.getText().trim()));
+				
+				new GroupMainPage(button);
+				currPage.dispose();
 			}
+			
 		});
 		
 		currPage.back_btn.addActionListener(new ActionListener() {
@@ -65,5 +63,7 @@ public class EditRecordPage extends AbstractRecordpage {
 			}
 			
 		});
+		
 	}
+
 }

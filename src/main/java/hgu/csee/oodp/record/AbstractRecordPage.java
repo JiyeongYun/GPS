@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.Record;
 
-public abstract class AbstractRecordpage {
+public abstract class AbstractRecordPage {
 	//template method
 	public void setLayout(JButton button, Group currGroup, Record currRecord, RecordPage currPage) {
 		currPage.setLayout(new GridLayout(7,1));

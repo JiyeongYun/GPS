@@ -20,12 +20,12 @@ public class RecordPage extends JFrame{
 	protected JButton exec_btn;
 	
 	public RecordPage(JButton button, Group currGroup, Record currRecord) {
-		MakeRecordPage makeRecordPage = new MakeRecordPage();
-		EditRecordPage editRecordpage = new EditRecordPage();
+		MakeRecord makeRecord = new MakeRecord(); 
+		EditRecord editRecord = new EditRecord();
 		
 		//template method DP
-		if(currRecord == null) makeRecordPage.setLayout(button, currGroup, currRecord, this);
-		else editRecordpage.setLayout(button, currGroup, currRecord, this);
+		if(currRecord == null) makeRecord.setLayout(button, currGroup, currRecord, this);
+		else editRecord.setLayout(button, currGroup, currRecord, this);
 	}
 
 	public void layoutSetup() {//layout setting
