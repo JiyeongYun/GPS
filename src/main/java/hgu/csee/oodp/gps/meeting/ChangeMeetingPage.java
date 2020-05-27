@@ -1,13 +1,10 @@
-package hgu.csee.oodp.meeting;
+package hgu.csee.oodp.gps.meeting;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +16,7 @@ import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.Meeting;
 
-public class MakeMeetingPage extends JFrame{
+public class ChangeMeetingPage extends JFrame{
 	private JLabel topLabel;
 	private JTextField titleField;
 	private JTextField dateField;
@@ -28,33 +25,40 @@ public class MakeMeetingPage extends JFrame{
 	private JTextField descriptionField;
 	private JTextField fileListField;
 	private JButton back_btn;
-	private JButton add_btn;
+	private JButton confirm_btn;
 	
-	public MakeMeetingPage(JButton button, Group currGroup) {
-		makeMakeMeetingPage(button, currGroup);
+	public ChangeMeetingPage(JButton button, Group currGroup, Meeting currMeeting) {
+		makeChangeMeetingPage(button, currGroup, currMeeting);
 	}
 
-	private void makeMakeMeetingPage(JButton button, Group currGroup) {
+	private void makeChangeMeetingPage(JButton button, Group currGroup, Meeting currMeeting) {
 		//Frame
 		setLayout(new GridLayout(0,1));
 		
 		//field
 		topLabel = new JLabel("<Fill the blanks>");
 		add(topLabel);
-		titleField = new JTextField("Title");
+		titleField = new JTextField(currMeeting.getTitle());
 		add(titleField);
-		dateField = new JTextField("Date(yyyy-mm-dd-hh-mm)");
+		dateField = new JTextField(currMeeting.getDate());
 		add(dateField);
-		locationField = new JTextField("Location");
+		locationField = new JTextField(currMeeting.getLocation());
 		add(locationField);
-		topicField = new JTextField("Topic");
+		topicField = new JTextField(currMeeting.getTopic());
 		add(topicField);
-		descriptionField = new JTextField("Description");
+		descriptionField = new JTextField(currMeeting.getDescription());
 		add(descriptionField);
-		fileListField = new JTextField("File list(a,b,c)");
+		
+		String tempStr = "";
+		for(String str : currMeeting.getRelatedFileList()) {
+			tempStr = tempStr + "," + str;
+		}
+		tempStr = tempStr.substring(1);
+		
+		fileListField = new JTextField(tempStr);
 		add(fileListField);
-		add_btn = new JButton(" add ");
-		add(add_btn);
+		confirm_btn = new JButton(" confirm ");
+		add(confirm_btn);
 		back_btn = new JButton(" 뒤로 ");
 		add(back_btn);
 		
@@ -68,18 +72,19 @@ public class MakeMeetingPage extends JFrame{
 			}
 		});
 		
-		add_btn.addActionListener(new ActionListener() {
+		confirm_btn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				addMeeting(button, currGroup);
-				new GroupMainPage(button);
+				chagneMeeting(button, currGroup, currMeeting);
+				new MeetingMainPage(button, currGroup, currMeeting);
 				setVisible(false);
 			}
 		});
+		
 	
 		// Layout setting
-		setTitle("*** Create a Meeting ***");
+		setTitle("*** Edit a Meeting ***");
 					
 		setVisible(true);					
 		setSize(400,800);					
@@ -88,7 +93,7 @@ public class MakeMeetingPage extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
-	public void addMeeting(JButton button, Group currGroup) {
+	public void chagneMeeting(JButton button, Group currGroup, Meeting currMeeting) {
 		try {
 			if(titleField.getText().isBlank() || dateField.getText().isBlank() || locationField.getText().isBlank() 
 					|| topicField.getText().isBlank() || descriptionField.getText().isBlank() || fileListField.getText().isBlank()) {
@@ -107,8 +112,12 @@ public class MakeMeetingPage extends JFrame{
 					tempList.add(str);
 				}
 				
-				Meeting tempMeeting = new Meeting(titleField.getText(), dateField.getText(), locationField.getText(), topicField.getText(), descriptionField.getText(), tempList);
-				currGroup.getMeetingList().add(tempMeeting);
+				currMeeting.setTitle(titleField.getText());
+				currMeeting.setDate(dateField.getText());
+				currMeeting.setLocation(locationField.getText());
+				currMeeting.setTopic(topicField.getText());
+				currMeeting.setDescription(descriptionField.getText());
+				currMeeting.setRelatedFileList(tempList);
 			}
 			
 		}catch(Exception e) { // if invalid input

@@ -1,4 +1,4 @@
-package hgu.csee.oodp.record;
+package hgu.csee.oodp.gps.record;
 
 import java.awt.GridLayout;
 

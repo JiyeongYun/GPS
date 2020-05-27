@@ -1,4 +1,4 @@
-package hgu.csee.oodp.meeting;
+package hgu.csee.oodp.gps.meeting;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package hgu.csee.oodp.meeting;
+package hgu.csee.oodp.gps.meeting;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

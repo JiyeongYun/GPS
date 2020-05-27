@@ -25,16 +25,16 @@ import javax.swing.ListModel;
 
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
+import hgu.csee.oodp.gps.meeting.MakeMeetingPage;
+import hgu.csee.oodp.gps.meeting.MeetingMainPage;
+import hgu.csee.oodp.gps.meeting.Popup;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.model.Meeting;
 import hgu.csee.oodp.gps.model.Record;
+import hgu.csee.oodp.gps.record.RecordPage;
 import hgu.csee.oodp.gps.task.MainTaskPage;
 import hgu.csee.oodp.gps.task.MakeMainTaskPage;
-import hgu.csee.oodp.meeting.MakeMeetingPage;
-import hgu.csee.oodp.meeting.MeetingMainPage;
-import hgu.csee.oodp.meeting.Popup;
-import hgu.csee.oodp.record.RecordPage;
 
 public class GroupMainPage extends JFrame{
 	Group currGroup = null;
