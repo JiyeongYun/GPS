@@ -3,6 +3,12 @@ package hgu.csee.oodp.gps.main;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -36,7 +42,7 @@ public class MainPage extends JFrame implements ActionListener {
 	private ChangeBG winter = new Winter();
 	private ArrayList<JButton> buttonList = new ArrayList<>();
 	private JLabel nameLb, groupLb, moodLb;
-	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn;
+	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn, withdrawlBtn;
 
 	public MainPage() {
 		GPSRunner.groupList = getGroupList();
@@ -66,6 +72,7 @@ public class MainPage extends JFrame implements ActionListener {
 		summerBtn = new JButton("Summer");
 		autumnBtn = new JButton("Autumn");
 		winterBtn = new JButton("Winter");
+		withdrawlBtn = new JButton("회원탈퇴");
 
 		nameLb.setBounds(50, 10, 200, 50);
 		groupLb.setBounds(50, 40, 200, 50);
@@ -76,6 +83,7 @@ public class MainPage extends JFrame implements ActionListener {
 		summerBtn.setBounds(40, 200, 90, 30);
 		autumnBtn.setBounds(40, 250, 90, 30);
 		winterBtn.setBounds(40, 300, 90, 30);
+		withdrawlBtn.setBounds(400, 400, 100, 30);
 
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
@@ -83,6 +91,7 @@ public class MainPage extends JFrame implements ActionListener {
 		summerBtn.addActionListener(this);
 		autumnBtn.addActionListener(this);
 		winterBtn.addActionListener(this);
+		withdrawlBtn.addActionListener(this);
 
 		for (int i = 0; i < GPSRunner.groupList.size(); i++) {
 			Group group = GPSRunner.groupList.get(i);
@@ -112,6 +121,7 @@ public class MainPage extends JFrame implements ActionListener {
 		add(summerBtn);
 		add(autumnBtn);
 		add(winterBtn);
+		add(withdrawlBtn);
 
 		setTitle("*** Main Page ***");
 		setVisible(true);
@@ -134,6 +144,39 @@ public class MainPage extends JFrame implements ActionListener {
 		setVisible(false);
 	}
 
+	public void deleteUser(String userName) {
+		String data = "";
+		File userFile = new File("./data/User.csv");
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(userFile));
+			String line = "";
+
+			while ((line = br.readLine()) != null) {
+				String[] userInfo = line.split(",");
+				if (!userInfo[0].equals(userName)) {
+					data += line+"\n";
+				}
+			}
+
+			System.out.println("input: " + data);
+			br.close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			FileWriter fw = new FileWriter(userFile, false);
+			fw.write(data);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == makeGroupBtn) {
@@ -151,6 +194,10 @@ public class MainPage extends JFrame implements ActionListener {
 			color = autumn.changeBackground();
 		} else if (e.getSource() == winterBtn) {
 			color = winter.changeBackground();
+		} else if (e.getSource() == withdrawlBtn) {
+			deleteUser(user.getId());
+			new LoginPage();
+			setVisible(false);
 		}
 		getContentPane().setBackground(color);
 	}
