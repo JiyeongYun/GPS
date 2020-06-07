@@ -18,8 +18,7 @@ import javax.swing.JTextField;
 
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
-import hgu.csee.oodp.gps.meeting.MakeMeetingPage;
-import hgu.csee.oodp.gps.meeting.MeetingMainPage;
+import hgu.csee.oodp.gps.meeting.MeetingPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.MainTask;
 import hgu.csee.oodp.gps.model.Meeting;
@@ -150,7 +149,7 @@ public class GroupMainPage extends JFrame {
 					if (tempTitle.equals(currGroup.getMeetingList().get(i).getTitle())) {
 						tempMeeting = currGroup.getMeetingList().get(i);
 						isIn = true;
-						new MeetingMainPage(button, currGroup, tempMeeting);
+						new MeetingPage(button, currGroup, tempMeeting);
 						setVisible(false);
 						break;
 					}
@@ -164,7 +163,7 @@ public class GroupMainPage extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new MakeMeetingPage(button, currGroup);
+				new MeetingPage(button, currGroup, null);
 				setVisible(false);
 			}
 
