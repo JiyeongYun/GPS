@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
+import hgu.csee.oodp.gps.meeting.ExportControl;
 import hgu.csee.oodp.gps.meeting.MeetingPage;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.MainTask;
@@ -124,7 +125,7 @@ public class GroupMainPage extends JFrame {
 
 		// south_panel
 		////////////////
-		south_panel.setLayout(new GridLayout(3, 5, 5, 10));
+		south_panel.setLayout(new GridLayout(3, 6, 5, 10));
 
 		// For Meeting
 		JLabel inputLable2 = new JLabel("Which Meeting?: ");
@@ -137,6 +138,8 @@ public class GroupMainPage extends JFrame {
 		south_panel.add(add_btn2);
 		JButton sort_btn = new JButton("sort"); // show the list sorted(accodring to the time)
 		south_panel.add(sort_btn);
+		JButton export_btn = new JButton("export");
+		south_panel.add(export_btn);
 
 		search_btn2.addActionListener(new ActionListener() {
 
@@ -179,6 +182,14 @@ public class GroupMainPage extends JFrame {
 			}
 
 		});
+		
+		export_btn.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ExportControl exportControl = new ExportControl(meetingArr);
+			}
+		});
 
 		// For Main Task(
 		JLabel inputLable = new JLabel("Which Main Task?: ");
@@ -190,6 +201,7 @@ public class GroupMainPage extends JFrame {
 		JButton add_btn = new JButton("add");
 		south_panel.add(add_btn);
 		south_panel.add(new JLabel("")); // blank space
+		south_panel.add(new JLabel("")); // blank space2
 
 		search_btn.addActionListener(new ActionListener() { // -> to Main Task Page
 
@@ -283,7 +295,7 @@ public class GroupMainPage extends JFrame {
 		add(south_panel, BorderLayout.SOUTH);
 
 		setVisible(true);
-		setSize(600, 400);
+		setSize(800, 400);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
