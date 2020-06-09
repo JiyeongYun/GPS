@@ -6,7 +6,7 @@ public class Gray implements State {
 
 	private static Gray gray;
 
-	public Gray() {
+	private Gray() {
 	}
 
 	public static Gray getInstance() {

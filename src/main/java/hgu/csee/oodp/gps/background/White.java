@@ -6,7 +6,7 @@ public class White implements State {
 
 	private static White white;
 
-	public White() {
+	private White() {
 	}
 
 	public static White getInstance() {

@@ -6,7 +6,7 @@ public class DarkGray implements State {
 
 	private static DarkGray darkGray;
 
-	public DarkGray() {
+	private DarkGray() {
 	}
 
 	public static DarkGray getInstance() {
