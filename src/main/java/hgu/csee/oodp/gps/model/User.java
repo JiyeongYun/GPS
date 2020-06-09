@@ -3,7 +3,7 @@ package hgu.csee.oodp.gps.model;
 import java.util.ArrayList;
 
 public class User {
-	private static User user = null;
+	private static User user;
 	
 	private String id;
 	private String password;
