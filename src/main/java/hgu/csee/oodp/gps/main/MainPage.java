@@ -1,8 +1,11 @@
 package hgu.csee.oodp.gps.main;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,17 +16,10 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import hgu.csee.oodp.gps.GPSRunner;
-import hgu.csee.oodp.gps.background.Autumn;
-import hgu.csee.oodp.gps.background.AutumnStrategy;
-import hgu.csee.oodp.gps.background.ChangeBG;
-import hgu.csee.oodp.gps.background.Spring;
-import hgu.csee.oodp.gps.background.SpringStrategy;
-import hgu.csee.oodp.gps.background.Summer;
-import hgu.csee.oodp.gps.background.SummerStrategy;
-import hgu.csee.oodp.gps.background.Winter;
-import hgu.csee.oodp.gps.background.WinterStrategy;
+import hgu.csee.oodp.gps.background.Light;
 import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.group.MakeGroupPage;
 import hgu.csee.oodp.gps.login.LoginPage;
@@ -31,24 +27,20 @@ import hgu.csee.oodp.gps.login.UserEdit;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.User;
 
-import javax.swing.JLabel;
-
 public class MainPage extends JFrame implements ActionListener {
 	public User user = User.getUser();
-	public Color color = Color.LIGHT_GRAY;
+	public Color color = Color.white;
 
-	private ChangeBG spring = new Spring();
-	private ChangeBG summer = new Summer();
-	private ChangeBG autumn = new Autumn();
-	private ChangeBG winter = new Winter();
+	private Light light = new Light();
 	private ArrayList<JButton> buttonList = new ArrayList<>();
-	private JLabel nameLb, groupLb, moodLb;
-	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn, withdrawlBtn, userEditBtn;
+
+	private JLabel nameLb, groupLb, darkBtn;
+	private JButton makeGroupBtn, logoutBtn, offBtn, onBtn, withdrawlBtn, userEditBtn;
+
 
 	public MainPage() {
 		GPSRunner.groupList = getGroupList();
 		makePage();
-		setStrateDP();
 	}
 
 	public ArrayList<Group> getGroupList() {
@@ -66,34 +58,29 @@ public class MainPage extends JFrame implements ActionListener {
 
 		nameLb = new JLabel("Name: " + user.getName());
 		groupLb = new JLabel("My Group List **************");
-		moodLb = new JLabel("<html>What season <br/>is it today?</html>");
+		darkBtn = new JLabel("<html>More<br/>dark?</html>");
 		makeGroupBtn = new JButton("Add");
 		logoutBtn = new JButton("Logout");
-		springBtn = new JButton("Spring");
-		summerBtn = new JButton("Summer");
-		autumnBtn = new JButton("Autumn");
-		winterBtn = new JButton("Winter");
+		offBtn = new JButton("Off");
+		onBtn = new JButton("On");
 		withdrawlBtn = new JButton("회원탈퇴");
 		userEditBtn = new JButton("회원수정");
 
 		nameLb.setBounds(50, 10, 200, 50);
 		groupLb.setBounds(50, 40, 200, 50);
-		moodLb.setBounds(40, 110, 90, 30);
+		darkBtn.setBounds(40, 110, 90, 30);
 		makeGroupBtn.setBounds(330, 40, 60, 50);
 		logoutBtn.setBounds(400, 40, 80, 50);
-		springBtn.setBounds(40, 150, 90, 30);
-		summerBtn.setBounds(40, 200, 90, 30);
-		autumnBtn.setBounds(40, 250, 90, 30);
-		winterBtn.setBounds(40, 300, 90, 30);
+
+		offBtn.setBounds(40, 150, 90, 30);
+		onBtn.setBounds(40, 200, 90, 30);
 		withdrawlBtn.setBounds(370, 400, 100, 30);
 		userEditBtn.setBounds(250, 400, 100, 30);
 
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
-		springBtn.addActionListener(this);
-		summerBtn.addActionListener(this);
-		autumnBtn.addActionListener(this);
-		winterBtn.addActionListener(this);
+		offBtn.addActionListener(this);
+		onBtn.addActionListener(this);
 		withdrawlBtn.addActionListener(this);
 		userEditBtn.addActionListener(this);
 
@@ -118,16 +105,15 @@ public class MainPage extends JFrame implements ActionListener {
 
 		add(nameLb);
 		add(groupLb);
-		add(moodLb);
+		add(darkBtn);
 		add(makeGroupBtn);
 		add(logoutBtn);
-		add(springBtn);
-		add(summerBtn);
-		add(autumnBtn);
-		add(winterBtn);
+		add(offBtn);
+		add(onBtn);
 		add(withdrawlBtn);
 		add(userEditBtn);
 
+		getContentPane().setBackground(color);
 		setTitle("*** Main Page ***");
 		setVisible(true);
 		setSize(500, 500);
@@ -135,13 +121,6 @@ public class MainPage extends JFrame implements ActionListener {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	}
-
-	public void setStrateDP() {
-		spring.setChangableBGStrategy(new SpringStrategy());
-		summer.setChangableBGStrategy(new SummerStrategy());
-		autumn.setChangableBGStrategy(new AutumnStrategy());
-		winter.setChangableBGStrategy(new WinterStrategy());
 	}
 
 	public void gotoGroupMainPage(JButton group) {
@@ -160,7 +139,7 @@ public class MainPage extends JFrame implements ActionListener {
 			while ((line = br.readLine()) != null) {
 				String[] userInfo = line.split(",");
 				if (!userInfo[0].equals(userName)) {
-					data += line+"\n";
+					data += line + "\n";
 				}
 			}
 
@@ -191,14 +170,10 @@ public class MainPage extends JFrame implements ActionListener {
 			new LoginPage();
 			user = null;
 			setVisible(false);
-		} else if (e.getSource() == springBtn) {
-			color = spring.changeBackground();
-		} else if (e.getSource() == summerBtn) {
-			color = summer.changeBackground();
-		} else if (e.getSource() == autumnBtn) {
-			color = autumn.changeBackground();
-		} else if (e.getSource() == winterBtn) {
-			color = winter.changeBackground();
+		} else if (e.getSource() == offBtn) {
+			color = light.off_button_pushed();
+		} else if (e.getSource() == onBtn) {
+			color = light.on_button_pushed();
 		} else if (e.getSource() == withdrawlBtn) {
 			deleteUser(user.getId());
 			new LoginPage();
@@ -207,7 +182,8 @@ public class MainPage extends JFrame implements ActionListener {
 			new UserEdit();
 			setVisible(false);
 		}
-		getContentPane().setBackground(color);
-	}
 
+		getContentPane().setBackground(color);
+
+	}
 }
