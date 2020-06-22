@@ -27,6 +27,7 @@ import hgu.csee.oodp.gps.background.WinterStrategy;
 import hgu.csee.oodp.gps.group.GroupMainPage;
 import hgu.csee.oodp.gps.group.MakeGroupPage;
 import hgu.csee.oodp.gps.login.LoginPage;
+import hgu.csee.oodp.gps.login.UserEdit;
 import hgu.csee.oodp.gps.model.Group;
 import hgu.csee.oodp.gps.model.User;
 
@@ -42,7 +43,7 @@ public class MainPage extends JFrame implements ActionListener {
 	private ChangeBG winter = new Winter();
 	private ArrayList<JButton> buttonList = new ArrayList<>();
 	private JLabel nameLb, groupLb, moodLb;
-	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn, withdrawlBtn;
+	private JButton makeGroupBtn, logoutBtn, springBtn, summerBtn, autumnBtn, winterBtn, withdrawlBtn, userEditBtn;
 
 	public MainPage() {
 		GPSRunner.groupList = getGroupList();
@@ -73,6 +74,7 @@ public class MainPage extends JFrame implements ActionListener {
 		autumnBtn = new JButton("Autumn");
 		winterBtn = new JButton("Winter");
 		withdrawlBtn = new JButton("회원탈퇴");
+		userEditBtn = new JButton("회원수정");
 
 		nameLb.setBounds(50, 10, 200, 50);
 		groupLb.setBounds(50, 40, 200, 50);
@@ -83,7 +85,8 @@ public class MainPage extends JFrame implements ActionListener {
 		summerBtn.setBounds(40, 200, 90, 30);
 		autumnBtn.setBounds(40, 250, 90, 30);
 		winterBtn.setBounds(40, 300, 90, 30);
-		withdrawlBtn.setBounds(400, 400, 100, 30);
+		withdrawlBtn.setBounds(370, 400, 100, 30);
+		userEditBtn.setBounds(250, 400, 100, 30);
 
 		makeGroupBtn.addActionListener(this);
 		logoutBtn.addActionListener(this);
@@ -92,6 +95,7 @@ public class MainPage extends JFrame implements ActionListener {
 		autumnBtn.addActionListener(this);
 		winterBtn.addActionListener(this);
 		withdrawlBtn.addActionListener(this);
+		userEditBtn.addActionListener(this);
 
 		for (int i = 0; i < GPSRunner.groupList.size(); i++) {
 			Group group = GPSRunner.groupList.get(i);
@@ -122,6 +126,7 @@ public class MainPage extends JFrame implements ActionListener {
 		add(autumnBtn);
 		add(winterBtn);
 		add(withdrawlBtn);
+		add(userEditBtn);
 
 		setTitle("*** Main Page ***");
 		setVisible(true);
@@ -197,6 +202,9 @@ public class MainPage extends JFrame implements ActionListener {
 		} else if (e.getSource() == withdrawlBtn) {
 			deleteUser(user.getId());
 			new LoginPage();
+			setVisible(false);
+		} else if (e.getSource() == userEditBtn) {
+			new UserEdit();
 			setVisible(false);
 		}
 		getContentPane().setBackground(color);
