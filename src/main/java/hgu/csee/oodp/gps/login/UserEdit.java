@@ -1,40 +1,48 @@
 package hgu.csee.oodp.gps.login;
 
+import javax.swing.JOptionPane;
+
 import hgu.csee.oodp.gps.main.MainPage;
 
 public class UserEdit extends UserEditor {
-
-	public UserEdit() {}
+//	public CareTaker caretaker;
+	public UserEdit() {
+	}
 
 	@Override
 	void pageInit() {
 		setTitle("*** User Edit Page ***");
-		idTf.setText(user.getId());
+		idTf.setText(MainPage.user.getId());
 		idTf.setEnabled(false);
-		pwdTf.setText(user.getPassword());
-		nameTf.setText(user.getName());
-		if(user.getGender() == 'M')
+		pwdTf.setText(MainPage.user.getPassword());
+		nameTf.setText(MainPage.user.getName());
+		if (MainPage.user.getGender() == 'M')
 			genderRb_M.setSelected(true);
 		else
 			genderRb_F.setSelected(true);
-		phoneTf.setText(user.getPhone());
-		
+		phoneTf.setText(MainPage.user.getPhone());
+
 		checkBtn.setText("");
 		checkBtn.setVisible(false);
 	}
 
 	@Override
 	void confirmBtnAction() {
-		user.setId(id);
-		user.setPassword(pwd);
-		user.setName(name);
-		user.setGender(gender);
-		user.setPhone(phone);
+		String before = MainPage.user.getName();
+		MainPage.caretaker.push(MainPage.user.createMemento());
+		MainPage.stackSize++;
+		MainPage.user.setId(id);
+		MainPage.user.setPassword(pwd);
+		MainPage.user.setName(name);
+		MainPage.user.setGender(gender);
+		MainPage.user.setPhone(phone);
+		JOptionPane.showMessageDialog(null, before + " -> " + MainPage.user.getName() );
 		
-		/* 
+
+		/*
 		 * Need function for modifying Database
 		 */
-		
+
 		new MainPage();
 	}
 
@@ -42,6 +50,5 @@ public class UserEdit extends UserEditor {
 	void cancelBtnAction() {
 		new MainPage();
 	}
-
 
 }

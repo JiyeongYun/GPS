@@ -2,37 +2,45 @@ package hgu.csee.oodp.gps.model;
 
 import java.util.ArrayList;
 
+import hgu.csee.oodp.gps.memento.Memento;
+
 public class User {
 	private static User user;
-	
+
 	private String id;
 	private String password;
 	private String name;
 	private char gender;
 	private String phone;
 	private ArrayList<String> groupList = new ArrayList<>();
-	
+
 	// Singleton DP
-	
-	private User() {}
-	
+
+	private User() {
+	}
+
 	public static User getUser() {
-		if(user == null) {
+		if (user == null) {
 			user = new User();
 		}
 		return user;
 	}
-	
-	/*
-	public User(String id, String password, String name, char gender, String phone) {
-		this.id = id;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.phone = phone;
-		this.groupList = new ArrayList<>();
+
+	public Memento createMemento() { // memento 생성
+		return new Memento(this.id, this.password, this.name, this.gender, this.phone, this.groupList);
 	}
-	*/
+
+	public void restoeMemento(Memento memento) { // memento 복원
+		this.id = memento.getId();
+		this.password = memento.getPassword();
+		this.name = memento.getName();
+		this.gender = memento.getGender();
+		this.phone = memento.getPhone();
+		this.groupList = memento.getGroupList();
+
+	}
+
+	// getter and setter
 
 	public String getId() {
 		return id;
@@ -81,9 +89,9 @@ public class User {
 	public void setGroupList(ArrayList<String> groupList) {
 		this.groupList = groupList;
 	}
-	
+
 	public void addGroup(String groupName) {
 		this.groupList.add(groupName);
 	}
-	
+
 }
