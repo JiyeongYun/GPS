@@ -8,6 +8,7 @@ public class ExportExecute {
 	private ExportCommand exportCommand;
 	
 	public void setCommand(ExportCommand exportCommand) {
+		ExportControl.undo.add(exportCommand);	//add it to the arrayList
 		this.exportCommand = exportCommand;
 	}
 	

@@ -16,4 +16,9 @@ public class ExportSpace implements ExportCommand{
 		space.exportSpace(meetingList);
 	}
 
+	@Override
+	public void undo() {
+		space.delete();		
+	}
+
 }

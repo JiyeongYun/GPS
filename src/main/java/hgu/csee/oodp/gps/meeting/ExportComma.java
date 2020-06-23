@@ -16,4 +16,9 @@ public class ExportComma implements ExportCommand  {
 		comma.exportComma(meetingList);		
 	}
 
+	@Override
+	public void undo() {
+		comma.delete();		
+	}
+
 }

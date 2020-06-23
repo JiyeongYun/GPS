@@ -6,4 +6,5 @@ import hgu.csee.oodp.gps.model.Meeting;
 
 public interface ExportCommand {
 	public void execute(ArrayList<Meeting> meetingList);
+	public void undo();
 }
