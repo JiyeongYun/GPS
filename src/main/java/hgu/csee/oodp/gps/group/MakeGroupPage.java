@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import hgu.csee.oodp.gps.GPSRunner;
 import hgu.csee.oodp.gps.main.MainPage;
 import hgu.csee.oodp.gps.model.Group;
+import hgu.csee.oodp.gps.model.MainTask;
+import hgu.csee.oodp.gps.model.Meeting;
 import hgu.csee.oodp.gps.model.User;
 import hgu.csee.oodp.gps.random.RandMain;
 
@@ -55,7 +57,9 @@ public class MakeGroupPage extends JFrame {
 					ArrayList<String> userList = new ArrayList<>();
 					userList.add(user.getName());
 					user.addGroup(name);
-					GPSRunner.groupList.add(new Group(size, name, userList, user.getName() ));
+					Group.GroupBuilder groupBuilder = new Group.GroupBuilder(size, name, userList, user.getName());
+					Group newGroup = groupBuilder.build();
+					GPSRunner.groupList.add(newGroup);
 				}
 				new MainPage();
 				setVisible(false);
@@ -73,6 +77,20 @@ public class MakeGroupPage extends JFrame {
 			}
 			
 		});
+		ArrayList<String> userList = new ArrayList<>();
+		ArrayList<MainTask> mainTaskList = new ArrayList<>();
+		ArrayList<Meeting> meetingList = new ArrayList<>();
+		ArrayList<Record> recordList = new ArrayList<>();
+		Group copiedGroup = new Group
+				.GroupBuilder(1, "Copied1", userList, user.getName())
+				.buildMeetingList(meetingList)
+				.build();
+		Group copiedGroup2 = new Group
+				.GroupBuilder(2, "Copied2", userList, user.getName())
+				.buildMainTaskList(mainTaskList)
+				.buildMeetingList(meetingList)
+				.build();
+				
 
 		add(panel);
 
