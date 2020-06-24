@@ -6,5 +6,9 @@ user6,6666,Anna,F,01066666666
 user7,7777,Jacob,M,01077777777
 user8,8888,Hello,M,01088888888
 u,1,2,M,2
+<<<<<<< HEAD
 1,1,Yo,F,010-1111-1111
 user,1,1,M,1
+=======
+1,1,1,M,1
+>>>>>>> branch 'master' of https://github.com/JiyeongYun/GPS.git
