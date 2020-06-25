@@ -33,6 +33,7 @@ public class GroupMainPage extends JFrame implements ActionListener {
 	JButton button;
 	ArrayList<MainTask> mainTaskArr;
 	ArrayList<Meeting> meetingArr;
+	ConcreteSubject sub;
 	
 	JPanel top_panel, center_panel, south_panel, west_panel, east_panel;
 	JLabel groupTitle;
@@ -47,12 +48,14 @@ public class GroupMainPage extends JFrame implements ActionListener {
 	
 
 	public GroupMainPage(JButton button) {
+		//layout setup
 		setButton(button);
 		getCurrGroup();
 		getMainTaskArr();
 		getMeetingArr();
-		
 		layoutSetup();
+		
+		//component setup
 		makePanel();
 		makeTopPanel();
 		makeCenterPanel();
@@ -60,7 +63,19 @@ public class GroupMainPage extends JFrame implements ActionListener {
 		makeEastPanel();
 		makeSouthPanel();
 		panelSetup();
+		
+		//listener setup
 		listenerAdd();
+		
+		//Meeting Observer setup
+		setMeetingObserver(meetingArr);
+	}
+	
+	public void setMeetingObserver(ArrayList<Meeting> mList) {
+		sub = new ConcreteSubject(mList);
+		
+		ConcreteObserver1 ob1 = new ConcreteObserver1(sub);
+		ConcreteObserver2 ob2 = new ConcreteObserver2(sub);
 	}
 	
 	public void makePanel() {
@@ -232,8 +247,10 @@ public class GroupMainPage extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "No such Meeting!");			
 		}
 		else if(e.getSource() == add_btn2) {
-			new MeetingPage(button, currGroup, null);
-			setVisible(false);
+			if(sub.notifyObservers() == 0) {
+				new MeetingPage(button, currGroup, null); // observer
+				setVisible(false);
+			}
 		}
 		else if(e.getSource() == sort_btn) {
 			Collections.sort(currGroup.getMeetingList());
